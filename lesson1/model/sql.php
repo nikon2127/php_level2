@@ -1,5 +1,6 @@
 <?php
 error_reporting(E_ALL);
+require_once 'function.php';
 /**
  * Created by PhpStorm.
  * User: Никон
@@ -37,17 +38,66 @@ function all_news(){
     return false;
 }
 
-//добавление записи
-function add_news(){
+//просмотр одной новости
+function article_news($id_article_news){
+    $id_article_news = (int) $id_article_news;
+    $link = connect_sql();
+    if(!empty($link)){
+        $sql = "SELECT * FROM `news` WHERE `id_news` = $id_article_news";
+        $result = mysqli_query($link, $sql);
+        while($row = mysqli_fetch_assoc($result)){
+            $emps = $row;
+        }
+        close_sql($link);
+        return $emps;
+    }
+    return false;
+}
 
+//добавление записи
+function add_news($header, $text){
+    $header = clean_text($header);
+    $text = clean_text($text);
+    $link = connect_sql();
+    if(!empty($link)){
+        $sql = "INSERT INTO `news`(`header`, `text`) VALUES ('$header', '$text')";
+        $result = mysqli_query($link, $sql);
+        if($result){
+            return true;
+        }
+        close_sql($link);
+    }
+    return false;
 }
 
 //удаление записи
-function delete_news(){
-
+function delete_news($id_news){
+    $id_news = (int) $id_news;
+    $link = connect_sql();
+    if(!empty($link)){
+        $sql = "DELETE FROM `news` WHERE `id_news` = '$id_news'";
+        $result = mysqli_query($link, $sql);
+        if($result){
+            return true;
+        }
+        close_sql($link);
+    }
+    return false;
 }
 
 //изменение записи
-function edit_news(){
-
+function edit_news($id_article_news, $header, $text){
+    $id_article_news = (int) $id_article_news;
+    $header = clean_text($header);
+    $text = clean_text($text);
+    $link = connect_sql();
+    if(!empty($link)){
+        $sql = "UPDATE `news` SET `header`='$header',`text`='$text' WHERE `id_news` = '$id_article_news'";
+        $result = mysqli_query($link, $sql);
+        if($result){
+            return true;
+        }
+        close_sql($link);
+    }
+    return false;
 }
