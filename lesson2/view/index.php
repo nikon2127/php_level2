@@ -11,7 +11,7 @@
 <h1><a href="add.php">добавить новость</a></h1>
 <?php foreach ($article as $vol): ?>
 <div>
-    <h2><?php echo $vol[1]; ?></h2>
+    <h2><a href="article.php?id=<?php echo $vol[0]; ?>"><?php echo $vol[1]; ?></a></h2>
     <p><?php echo $vol[2]; ?></p>
 </div>
     <a href="edit.php?id=<?php echo $vol[0]; ?>">Редактировать новость</a>
