@@ -83,14 +83,14 @@ class SqlLesson2
         $result = $this->sql_connect($sql);
         if($result){
             $emps = array();
-            while ($row = mysqli_fetch_assoc($result)){
+            while ($row = mysqli_fetch_row($result)){
                 $emps[] = $row;
             }
         }
         if(!empty($emps)){
             $mass = array();
             foreach ($emps as $vol){
-                $mass[] = $vol['id_news'];
+                $mass[] = $vol[0];
             }
             return $mass;
         }
@@ -103,7 +103,7 @@ class SqlLesson2
         $sql = "SELECT * FROM $this->news WHERE $this->id_news = $id";
         $result = $this->sql_connect($sql);
         if($result){
-            $row = mysqli_fetch_assoc($result);
+            $row = mysqli_fetch_row($result);
         }
         if(!empty($row)){
             return $row;

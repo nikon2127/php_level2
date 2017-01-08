@@ -1,5 +1,5 @@
 <?php
-
+error_reporting(E_ALL);
 /**
  * Created by PhpStorm.
  * User: Никон
@@ -11,7 +11,7 @@ abstract class ArticleAbstract
     public $id;
     public $title;
     public $text;
-    private $art;
+    public $art;
 
     public function __construct()
     {
@@ -27,7 +27,8 @@ abstract class ArticleAbstract
         if(!empty($mas)){
             $article = array();
             foreach ($mas as $vol){
-                $article[] = $this->article_one($vol);
+                $this->id = $vol;
+                $article[] = $this->article_one();
             }
         }
         if(isset($article)){

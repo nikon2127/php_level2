@@ -1,5 +1,6 @@
 <?php
-
+error_reporting(E_ALL);
+require_once 'ArticleAbstract.php';
 /**
  * Created by PhpStorm.
  * User: Никон
