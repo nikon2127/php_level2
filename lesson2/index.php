@@ -7,5 +7,4 @@ require_once 'model/NewsClass.php';
 
 $art = new NewsClass();
 $article = $art->article_all();
-//var_dump($article);
 require 'view/index.php';
