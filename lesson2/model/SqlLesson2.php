@@ -13,6 +13,12 @@ class SqlLesson2
     private $user;
     private $password;
     private $bd;
+    //столбцы бд
+    private $news;
+    private $id_news;
+    private $header;
+    private $text;
+    private $link;
 
     //приводим данные из формы в нормальную форму
     public function clean_text($string){
@@ -20,6 +26,7 @@ class SqlLesson2
         $string = stripslashes($string);
         $string = strip_tags($string);
         $string = htmlspecialchars($string);
+        $string = mysqli_real_escape_string($this->link, $string);
         return $string;
     }
 
@@ -29,15 +36,24 @@ class SqlLesson2
         $this->user = 'root';
         $this->password = '';
         $this->bd = 'lesson1';
+        $this->news = 'news';
+        $this->id_news = 'id_news';
+        $this->header  = 'header';
+        $this->text = 'text';
+        $this->link = mysqli_connect($this->server, $this->user, $this->password, $this->bd);
+    }
+
+    public function __destruct()
+    {
+        // TODO: Implement __destruct() method.
+        mysqli_close($this->link);
     }
 
     //подключаемся к базе данных
     private function sql_connect($sql){
-        $link = mysqli_connect($this->server, $this->user, $this->password, $this->bd);
-        if($link){
-            $result = mysqli_query($link, $sql);
+        if($this->link){
+            $result = mysqli_query($this->link, $sql);
         }
-        mysqli_close($link);
         if($result){
             return $result;
         }
@@ -46,7 +62,7 @@ class SqlLesson2
 
     //запрашиваем количество записей в базе
     public function sql_count(){
-        $sql = "SELECT count(*) FROM `news` WHERE 1";
+        $sql = "SELECT count(*) FROM $this->news WHERE 1";
         $result = $this->sql_connect($sql);
         if($result){
             $row = mysqli_fetch_assoc($result);
@@ -61,11 +77,9 @@ class SqlLesson2
         return false;
     }
 
-    //запрашиваем все записи у базы
-    public function sql_select_all($pos, $col){
-        $pos = (int) $pos;
-        $col = (int) $col;
-        $sql = "SELECT * FROM `news` WHERE 1 LIMIT $pos, $col";
+    //запрашиваем все id у базы
+    public function sql_select_all(){
+        $sql = "SELECT $this->id_news FROM $this->news WHERE 1";
         $result = $this->sql_connect($sql);
         if($result){
             $emps = array();
@@ -74,7 +88,11 @@ class SqlLesson2
             }
         }
         if(!empty($emps)){
-            return $emps;
+            $mass = array();
+            foreach ($emps as $vol){
+                $mass[] = $vol['id_news'];
+            }
+            return $mass;
         }
         return false;
     }
@@ -82,7 +100,7 @@ class SqlLesson2
     //запрашиваем одну запись по id
     public function sql_select_one($id){
         $id = (int) $id;
-        $sql = "SELECT * FROM `news` WHERE `id_news` = $id";
+        $sql = "SELECT * FROM $this->news WHERE $this->id_news = $id";
         $result = $this->sql_connect($sql);
         if($result){
             $row = mysqli_fetch_assoc($result);
@@ -98,7 +116,7 @@ class SqlLesson2
         $id = (int) $id;
         $title = $this->clean_text($title);
         $text = $this->clean_text($text);
-        $sql = "UPDATE `news` SET `header` = '$title',`text` = '$text' WHERE `id_news` = $id";
+        $sql = "UPDATE $this->news SET $this->header = '$title', $this->text = '$text' WHERE $this->id_news = $id";
         return $this->sql_connect($sql);
     }
 
@@ -106,14 +124,14 @@ class SqlLesson2
     public function sql_add($title, $text){
         $title = $this->clean_text($title);
         $text = $this->clean_text($text);
-        $sql = "INSERT INTO `news`(`header`, `text`) VALUES ('$title', '$text')";
+        $sql = "INSERT INTO $this->news($this->header, $this->text) VALUES ('$title', '$text')";
         return $this->sql_connect($sql);
     }
 
     //удаляем запись
     public function sql_delete($id){
         $id = (int) $id;
-        $sql = "DELETE FROM `news` WHERE `id_news` = $id";
+        $sql = "DELETE FROM $this->news WHERE $this->id_news = $id";
         return $this->sql_connect($sql);
     }
 }
