@@ -6,6 +6,7 @@ error_reporting(E_ALL);
  * Date: 06.01.2017
  * Time: 23:14
  */
+require_once 'SqlLesson2.php';
 abstract class ArticleAbstract
 {
     public $id;
