@@ -1,7 +1,11 @@
 <?php
-require_once __DIR__ . '/model/News.php';
 
+require_once __DIR__ . '/function/autoload.php';
 
-$news = News::getAll();
+$ctrl = isset($_GET['ctrl']) ? $_GET['ctrl'] : 'News';
+$act = isset($_GET['act']) ? $_GET['act'] : 'All';
 
-include __DIR__ . '/view/index.php';
+$controllerClassName = $ctrl . 'Controller';
+$controller = new $controllerClassName;
+$method = 'action' . $act;
+$controller->$method();

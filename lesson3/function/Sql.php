@@ -1,11 +1,5 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: Никон
- * Date: 10.01.2017
- * Time: 0:09
- */
 class Sql
 {
     public $link;
@@ -14,7 +8,7 @@ class Sql
         $this->link = mysqli_connect('localhost', 'root', '', 'lesson1');
     }
 
-    public function query($sql, $class = 'stdClass'){
+    public function select($sql, $class = 'stdClass'){
         $result = mysqli_query($this->link, $sql);
         if(false === $result){
             return false;
@@ -24,5 +18,9 @@ class Sql
             $res[] = $row;
         }
         return $res;
+    }
+
+    public function selectOne($sql, $class = 'strClass'){
+        return $this->select($sql, $class)[0];
     }
 }

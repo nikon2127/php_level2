@@ -1,6 +1,5 @@
 <?php
-require_once __DIR__ . '/../function/Sql.php';
-require_once __DIR__ . '/../function/ArticleAbstract.php';
+
 class News extends ArticleAbstract
 {
     public $id_news;
@@ -15,6 +14,13 @@ class News extends ArticleAbstract
 
     public static function getAll(){
         $all = new Sql();
-        return $all->query("SELECT * FROM `news`", self::class);
+        $sql = "SELECT * FROM `news`";
+        return $all->select($sql, 'News');
+    }
+
+    public static function getOne($id){
+        $one = new Sql();
+        $sql = "SELECT * FROM `news` WHERE `id_news` = $id";
+        return $one->selectOne($sql, 'News');
     }
 }
