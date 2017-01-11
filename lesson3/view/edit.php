@@ -8,7 +8,7 @@ error_reporting(E_ALL);
     <title>Title</title>
 </head>
 <body>
-<form method="post" action="index.php?ctrl=News&act=Edit">
+<form method="post" action="index.php?ctrl=Admin&act=Edit">
     <input type="hidden" name="id" value="<?php echo $id; ?>">
     <p>заголовок: <input type="text" name="title" <?php if(!empty($title)): ?>value="<?php echo $title; ?>"<?php endif; ?>></p>
     <p>текст:<br>
