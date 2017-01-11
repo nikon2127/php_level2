@@ -23,4 +23,10 @@ abstract class ArticleAbstract
         $sql = "INSERT INTO " . static::$table . "(`header`, `text`) VALUES ('$title', '$text')";
         return $add->insert($sql);
     }
+
+    public static function getDelete($id){
+        $del = new Sql();
+        $sql = "DELETE FROM ". static::$table. " WHERE `id_news` = $id";
+        return $del->insert($sql);
+    }
 }

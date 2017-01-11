@@ -20,4 +20,10 @@ class NewsController
         }
         include __DIR__ . '/../view/add.php';
     }
+
+    public function actionDelete(){
+        $id = (int) $_GET['id'];
+        News::getDelete($id);
+        header("Location: index.php");
+    }
 }
