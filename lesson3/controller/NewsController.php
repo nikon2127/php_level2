@@ -12,4 +12,12 @@ class NewsController
         $news = News::getOne($id);
         include __DIR__ . '/../view/one.php';
     }
+
+    public function actionAdd(){
+        if(!empty($_POST['title']) && !empty($_POST['text'])){
+            News::getAdd($_POST['title'], $_POST['text']);
+            header("Location: index.php");
+        }
+        include __DIR__ . '/../view/add.php';
+    }
 }

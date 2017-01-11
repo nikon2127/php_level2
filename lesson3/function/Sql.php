@@ -23,4 +23,8 @@ class Sql
     public function selectOne($sql, $class = 'strClass'){
         return $this->select($sql, $class)[0];
     }
+
+    public function insert($sql){
+        return mysqli_query($this->link, $sql);
+    }
 }

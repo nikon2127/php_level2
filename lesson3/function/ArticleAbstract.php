@@ -17,4 +17,10 @@ abstract class ArticleAbstract
         $sql = "SELECT * FROM ". static::$table. " WHERE `id_news` = $id";
         return $one->selectOne($sql, static::$class);
     }
+
+    public static function getAdd($title, $text){
+        $add = new Sql();
+        $sql = "INSERT INTO " . static::$table . "(`header`, `text`) VALUES ('$title', '$text')";
+        return $add->insert($sql);
+    }
 }

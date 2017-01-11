@@ -9,5 +9,6 @@
 <body>
     <h1><?php echo $news->header; ?></h1>
     <p><?php echo $news->text; ?></p>
+<p><a href="index.php">На главную</a></p>
 </body>
 </html>
