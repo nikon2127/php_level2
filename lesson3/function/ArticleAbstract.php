@@ -26,7 +26,13 @@ abstract class ArticleAbstract
 
     public static function getDelete($id){
         $del = new Sql();
-        $sql = "DELETE FROM ". static::$table. " WHERE `id_news` = $id";
+        $sql = "DELETE FROM ". static::$table . " WHERE `id_news` = $id";
         return $del->insert($sql);
+    }
+
+    public static function getEdit($id, $title, $text){
+        $edit = new Sql();
+        $sql = "UPDATE " . static::$table. " SET `header`='$title',`text`='$text' WHERE `id_news` = $id";
+        return $edit->insert($sql);
     }
 }
