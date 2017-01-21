@@ -2,7 +2,13 @@
 
 class View implements Iterator
 {
+    private $position;
     protected $data = [];
+
+    public function __construct()
+    {
+        $this->position = 0;
+    }
 
     //вызывается при создании необьявленой переменной
     public function __set($key, $value)
@@ -35,26 +41,26 @@ class View implements Iterator
 
     public function current()
     {
-
+        return $this->data[$this->position];
     }
 
     public function next()
     {
-
+        ++$this->position;
     }
 
     public function key()
     {
-
+        return $this->position;
     }
 
     public function valid()
     {
-
+        return isset($this->data[$this->position]);
     }
 
     public function rewind()
     {
-
+        $this->position = 0;
     }
 }
