@@ -1,5 +1,12 @@
+#включаем модуль переписывания
 RewriteEngine on
 
+#путь до корня сайта
+RewriteBase /
+
+#Исключения - адреса, которые не нужно переписывать
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.php [L,QSA]
+
+#правила изменения URL - адреса
+RewriteRule .* index.php?q=$0
