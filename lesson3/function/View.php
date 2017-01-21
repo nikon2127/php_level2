@@ -2,8 +2,8 @@
 
 class View implements Iterator
 {
+    private $data = [];
     private $position;
-    protected $data = [];
 
     public function __construct()
     {
@@ -39,28 +39,33 @@ class View implements Iterator
         echo $this->render($template);
     }
 
+    //возвращает текущий элемент
     public function current()
     {
-        return $this->data[$this->position];
+        return current($this->data);
     }
 
+    //переходит к следующему элементу
     public function next()
     {
-        ++$this->position;
+        next($this->data);
     }
 
+    //возвращает ключ текущего элемента
     public function key()
     {
-        return $this->position;
+        return key($this->data);
     }
 
+    //проверка корректности позиции
     public function valid()
     {
-        return isset($this->data[$this->position]);
+        return isset($this->data[key($this->data)]);
     }
 
+    //возвращает итератор на первый элемент
     public function rewind()
     {
-        $this->position = 0;
+        reset($this->data);
     }
 }
