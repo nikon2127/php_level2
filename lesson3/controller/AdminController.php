@@ -3,11 +3,30 @@ error_reporting(E_ALL);
 class AdminController
 {
     public function actionAdd(){
-        if(!empty($_POST['title']) && !empty($_POST['text'])){
-            News::getAdd($_POST['title'], $_POST['text']);
+
+        if(!empty($_POST['title'])){
+            $title = $_POST['title'];
+        }else {
+            $title = '';
+            $text = '';
+        }
+
+        if(!empty($_POST['text'])){
+            $text = $_POST['text'];
+        }else {
+            $text = '';
+        }
+
+        if(!empty($title) && !empty($text)){
+            $news = News::getAdd($title, $text);
             header("Location: index.php");
         }
-        include __DIR__ . '/../view/add.php';
+
+        $view = new View();
+        $view->title = $title;
+        $view->text = $text;
+        $view->display('add.php');
+        //include __DIR__ . '/../view/add.php';
     }
 
     public function actionDelete(){

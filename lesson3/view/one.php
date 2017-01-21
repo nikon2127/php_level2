@@ -7,8 +7,8 @@
     <title>Title</title>
 </head>
 <body>
-    <h1><?php echo $news->header; ?></h1>
-    <p><?php echo $news->text; ?></p>
+    <h1><?php echo $item->header; ?></h1>
+    <p><?php echo $item->text; ?></p>
 <p><a href="index.php">На главную</a></p>
 </body>
 </html>
