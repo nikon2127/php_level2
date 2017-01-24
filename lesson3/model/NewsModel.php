@@ -10,8 +10,8 @@ class NewsModel
     extends AbstractModel
 {
     static protected $table = 'news';
-
-    /*public $id_news;
+    static protected $id = 'id_news';
+    /*
     public $header;
     public $text;*/
 }

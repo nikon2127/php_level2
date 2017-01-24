@@ -30,4 +30,10 @@ class Sql
         $sth = $this->dbh->prepare($sql);
         return $sth->execute($params);
     }
+
+    //получаем id последней записи
+    public function lastInsertId()
+    {
+        return $this->dbh->lastInsertId();
+    }
 }
