@@ -3,7 +3,8 @@
 class NewsController
 {
     public function actionAll(){
-        $news = News::getAll();
+        $news = NewsModel::findAll();
+        //$news = News::getAll();
         $view = new View();
         $view->item = $news;
         $view->display('all.php');
@@ -12,7 +13,8 @@ class NewsController
 
     public function actionOne(){
         $id = (int) $_GET['id'];
-        $news = News::getOne($id);
+        //$news = News::getOne($id);
+        $news = NewsModel::findOneByPk($id);
         $view = new View();
         $view->item = $news;
         $view->display('one.php');
