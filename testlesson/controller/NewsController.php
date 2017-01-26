@@ -4,9 +4,11 @@ class NewsController
 {
     public function actionAll()
     {
-        $db = new Sql();
-        $res = $db->query('SELECT * FROM news WHERE id_news=:id', [':id' => 1]);
-        var_dump($res);
+        //$news = new NewsModel();
+        //$news->header = 'header';
+        //$news->text = 'text';
+        //$news->insert();
+        //var_dump( NewsModel::findOneByPk(66));
         //echo NewsModel::getTable();
         /*$news = News::getAll();
         $view = new View();
