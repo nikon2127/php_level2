@@ -31,7 +31,13 @@ class Sql
         return $sth->execute($params);
     }
 
-    /*public function select($sql, $class = 'stdClass'){
+    //получаем id последней записи
+    public function lastInsertId()
+    {
+        return $this->dbh->lastInsertId();
+    }
+
+    /*public classes select($sql, $class = 'stdClass'){
         $result = mysqli_query($this->link, $sql);
         if(false === $result){
             return false;
@@ -43,7 +49,7 @@ class Sql
         return $res;
     }
 
-    public function selectOne($sql, $class = 'strClass'){
+    public classes selectOne($sql, $class = 'strClass'){
         return $this->select($sql, $class)[0];
     }*/
 }

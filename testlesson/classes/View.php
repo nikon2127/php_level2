@@ -4,7 +4,7 @@ class View implements Iterator
 {
     protected $data = [];
 
-    /*public function assing($name, $value)
+    /*public classes assing($name, $value)
     {
         $this->data[$name] = $value;
     }*/

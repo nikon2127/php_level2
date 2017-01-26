@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/function/autoload.php';
+require_once __DIR__ . '/classes/autoload.php';
 
 $ctrl = isset($_GET['ctrl']) ? $_GET['ctrl'] : 'News';
 $act = isset($_GET['act']) ? $_GET['act'] : 'All';

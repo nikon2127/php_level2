@@ -4,10 +4,14 @@ class NewsController
 {
     public function actionAll()
     {
-        //$news = new NewsModel();
+        $news = new NewsModel();
         //$news->header = 'header';
-        //$news->text = 'text';
+        //$news->text = 'text1111';
+        $news->header = 'titi';
+        $news->id = 36;
+        $news->save();
         //$news->insert();
+        var_dump($news->id);
         //var_dump( NewsModel::findOneByPk(66));
         //echo NewsModel::getTable();
         /*$news = News::getAll();
