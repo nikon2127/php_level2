@@ -20,7 +20,7 @@ class AdminController
         if(!empty($_POST['title']) && !empty($_POST['text'])){
             $news->insert();
             //News::getAdd($title, $text);
-            header("Location: index.php?ctrl=News&act=One&id=$news->id_news");
+            header("Location: index.php?ctrl=News&act=One&id=$news->id");
             die;
         }else{
             $view = new View();
@@ -33,9 +33,9 @@ class AdminController
 
     public function actionDelete()
     {
-        $id = (int) $_GET['id'];
         $news = new NewsModel();
-        $news->delete($id);
+        $news->id = (int) $_GET['id'];
+        $news->delete();
         //News::getDelete($id);
         header("Location: index.php");
     }
@@ -44,13 +44,13 @@ class AdminController
     {
         $news = new NewsModel();
         if(!empty($_GET['id'])){
-            $news->id_news = (int) $_GET['id'];
-            $article = $news::findOneByPk($news->id_news);
+            $news->id = (int) $_GET['id'];
+            $article = $news::findOneByPk($news->id);
             //$news = News::getOne($id);
             $news->header = $article->header;
             $news->text = $article->text;
         }else{
-            $news->id_news = '';
+            $news->id = '';
             $news->header = '';
             $news->text = '';
         }
@@ -64,20 +64,16 @@ class AdminController
         }
 
         if(isset($_POST['id'])){
-            $news->id_news = (int) $_POST['id'];
-        }
-
-        if(empty($news->id_news)){
-            header("Location: index.php");
+            $news->id = (int) $_POST['id'];
         }
 
         if(!empty($_POST['title']) && !empty($_POST['text']) && !empty($_POST['id'])){
-            $news->update($news->id_news);
+            $news->update();
             //News::getEdit($_POST['id'], $_POST['title'], $_POST['text']);
-            header("Location: index.php?crtl=News&act=One&id=$news->id_news");
+            header("Location: index.php?crtl=News&act=One&id=$news->id");
         }else{
             $view = new View();
-            $view->id = $news->id_news;
+            $view->id = $news->id;
             $view->title = $news->header;
             $view->text = $news->text;
             $view->display('edit.php');

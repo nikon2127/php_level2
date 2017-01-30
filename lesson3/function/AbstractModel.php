@@ -9,8 +9,6 @@
 class AbstractModel
 {
     static protected $table;
-    static protected $id;
-    public $id_news;
     protected $data = [];
 
     public function __set($name, $value)
@@ -37,7 +35,7 @@ class AbstractModel
     public static function findOneByPk($id)
     {
         $class = get_called_class();
-        $sql = 'SELECT * FROM ' . static::$table . ' WHERE ' . static::$id . '=:id';
+        $sql = 'SELECT * FROM ' . static::$table . ' WHERE id=:id';
         $db = new Sql();
         $db->setClassName($class);
         return $db->query($sql, [':id' => $id])[0];
@@ -53,12 +51,11 @@ class AbstractModel
         }
         $sql = 'INSERT INTO ' . static::$table . ' ('
             . implode(', ', $cols)
-            . ') VALUE  
-            (' . implode(', ', array_keys($dat)) . ')';
+            . ') VALUE (' . implode(', ', array_keys($dat)) . ')';
 
         $db = new Sql();
         if($db->execute($sql, $dat)){
-            $this->id_news = $db->lastInsertId();
+            $this->id = $db->lastInsertId();
         }
     }
 
@@ -73,29 +70,28 @@ class AbstractModel
     }
 
     //удаление записи
-    public function delete($id)
+    public function delete()
     {
-        $sql = 'DELETE FROM ' . static::$table . ' WHERE ' . static::$id . '= :id';
+        $sql = 'DELETE FROM ' . static::$table . ' WHERE id = :id';
         $db = new Sql();
-        $db->execute($sql, [':id' => $id]);
+        $db->execute($sql, [':id' => $this->id]);
     }
 
     //обновляет запись
-    public function update($id)
+    public function update()
     {
-        $cols = array_keys($this->data);
-        $dat = [];
-        $inc = [];
-        foreach ($cols as $val){
-            $inc[':' . $val] = $this->data[$val];
-            $dat[] = $val . '=:' . $val;
+        $data = [];
+        $cols = [];
+        foreach ($this->data as $k => $v){
+            $data[':' . $k] = $v;
+            if('id' == $k){
+                continue;
+            }
+            $cols[] = $k . '=:' . $k;
         }
-        $inc[':' . static::$id] = $id;
-        //var_dump($dat, $inc); die;
-        $sql = 'UPDATE ' . static::$table . ' SET ' . implode(', ', $dat) . ' WHERE '
-            . static::$id . '=:' . static::$id;
+        $sql = 'UPDATE ' . static::$table . ' SET ' . implode(', ', $cols) . ' WHERE id=:id';
 
         $db = new Sql();
-        $db->execute($sql, $inc);
+        $db->execute($sql, $data);
     }
 }
