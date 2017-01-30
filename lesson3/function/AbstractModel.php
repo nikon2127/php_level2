@@ -21,6 +21,14 @@ class AbstractModel
         return $this->data[$name];
     }
 
+    public function __isset($name)
+    {
+        if(isset($this->data[$name])){
+            return $this->data[$name];
+        }
+        return false;
+    }
+
     //получение всех записей
     public static function findAll()
     {
@@ -93,5 +101,14 @@ class AbstractModel
 
         $db = new Sql();
         $db->execute($sql, $data);
+    }
+
+    public function save()
+    {
+        if(empty($this->id)){
+            $this->insert();
+        }else {
+            $this->update();
+        }
     }
 }

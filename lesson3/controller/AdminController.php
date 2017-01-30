@@ -18,7 +18,7 @@ class AdminController
         }
 
         if(!empty($_POST['title']) && !empty($_POST['text'])){
-            $news->insert();
+            $news->save();
             //News::getAdd($title, $text);
             header("Location: index.php?ctrl=News&act=One&id=$news->id");
             die;
@@ -68,7 +68,7 @@ class AdminController
         }
 
         if(!empty($_POST['title']) && !empty($_POST['text']) && !empty($_POST['id'])){
-            $news->update();
+            $news->save();
             //News::getEdit($_POST['id'], $_POST['title'], $_POST['text']);
             header("Location: index.php?crtl=News&act=One&id=$news->id");
         }else{
