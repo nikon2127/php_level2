@@ -17,7 +17,7 @@ class AdminController
             $news->text = '';
         }
 
-        if(!empty($_POST['title']) && !empty($_POST['text'])){
+        if(!empty($news->header) && !empty($news->text)){
             $news->save();
             //News::getAdd($title, $text);
             header("Location: index.php?ctrl=News&act=One&id=$news->id");

@@ -43,10 +43,14 @@ class AbstractModel
     public static function findOneByPk($id)
     {
         $class = get_called_class();
-        $sql = 'SELECT * FROM ' . static::$table . ' WHERE id=:id';
+        $sql = 'SELECT * FROM ' . static::$table . ' WHERE id=:1id';
         $db = new Sql();
         $db->setClassName($class);
-        return $db->query($sql, [':id' => $id])[0];
+        $news = $db->query($sql, [':id' => $id]);
+        if(empty($news)){
+            return false;
+        }
+        return $news[0];
     }
 
     //добавление записи
