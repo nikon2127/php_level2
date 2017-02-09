@@ -43,7 +43,7 @@ class AbstractModel
     public static function findOneByPk($id)
     {
         $class = get_called_class();
-        $sql = 'SELECT * FROM ' . static::$table . ' WHERE id=:1id';
+        $sql = 'SELECT * FROM ' . static::$table . ' WHERE id=:id';
         $db = new Sql();
         $db->setClassName($class);
         $news = $db->query($sql, [':id' => $id]);

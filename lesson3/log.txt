@@ -6,3 +6,5 @@ Sun, 05 Feb 17 23:55:05 +0300 | SQLSTATE[HY093]: Invalid parameter number: param
 Sun, 05 Feb 17 23:56:11 +0300 | SQLSTATE[HY093]: Invalid parameter number: parameter was not defined | HY093 | C:\OpenServer\domains\php_level2\lesson3\function\Sql.php | 52
 Sun, 05 Feb 17 23:58:17 +0300 | SQLSTATE[42S02]: Base table or view not found: 1146 Table 'lesson1.news1' doesn't exist | 42S02 | C:\OpenServer\domains\php_level2\lesson3\function\Sql.php | 36
 Mon, 06 Feb 17 00:00:25 +0300 | SQLSTATE[42S02]: Base table or view not found: 1146 Table 'lesson1.news1' doesn't exist | 42S02 | C:\OpenServer\domains\php_level2\lesson3\function\Sql.php | 34
+Thu, 09 Feb 17 22:23:16 +0300 | SQLSTATE[HY093]: Invalid parameter number: parameter was not defined | HY093 | C:\OpenServer\domains\php_level2\lesson3\function\Sql.php | 34
+Thu, 09 Feb 17 22:30:47 +0300 | SQLSTATE[HY093]: Invalid parameter number: parameter was not defined | HY093 | C:\OpenServer\domains\php_level2\lesson3\function\Sql.php | 34

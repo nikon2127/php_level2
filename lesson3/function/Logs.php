@@ -13,7 +13,7 @@ class Logs
 
     public function logInsert(){
         $data = date(DATE_RFC822) . ' | ' . $this->message . ' | ' . $this->code . ' | ' .
-            $this->file . ' | ' . $this->line . "\r";
+            $this->file . ' | ' . $this->line . "\r\n";
         file_put_contents(__DIR__ . '/../log.txt', $data, FILE_APPEND);
     }
 }

@@ -80,4 +80,11 @@ class AdminController
             //include __DIR__ . '/../view/edit.php';
         }
     }
+
+    public function actionLogs()
+    {
+        $view = new View();
+        $view->log = file(__DIR__ . '/../log.txt');
+        $view->display('log.php');
+    }
 }

@@ -13,6 +13,8 @@ class Sql
             $this->dbh = new PDO($dsn, 'root', '');
             $this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }catch (PDOException $e){
+            $log = new Logs($e->getMessage(), $e->getCode(), $e->getFile(), $e->getLine());
+            $log->logInsert();
             $error = new View();
             $error->error = $e->getMessage();
             $error->display('403.php');
@@ -31,6 +33,8 @@ class Sql
             $sth = $this->dbh->prepare($sql);
             $sth->execute($params);
         }catch (PDOException $e) {
+            $log = new Logs($e->getMessage(), $e->getCode(), $e->getFile(), $e->getLine());
+            $log->logInsert();
             $error = new View();
             $error->error = $e->getMessage();
             $error->display('403.php');
@@ -45,6 +49,8 @@ class Sql
             $sth = $this->dbh->prepare($sql);
             $zpr = $sth->execute($params);
         }catch (PDOException $e){
+            $log = new Logs($e->getMessage(), $e->getCode(), $e->getFile(), $e->getLine());
+            $log->logInsert();
             $error = new View();
             $error->error = $e->getMessage();
             $error->display('403.php');

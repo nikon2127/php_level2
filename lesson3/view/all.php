@@ -8,6 +8,7 @@
 </head>
 <body>
 <p><a href="index.php?ctrl=Admin&act=Add">добавить новость</a></p>
+<p><a href="index.php?ctrl=Admin&act=Logs">просмотреть лог файл</a></p>
 <?php foreach ($item as $vol): ?>
     <h1><a href="index.php?<?php echo 'ctrl=News&act=One&id=' . $vol->id; ?>"><?php echo $vol->header; ?></a></h1>
     <p><?php echo $vol->text; ?></p>
