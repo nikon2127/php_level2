@@ -2,11 +2,11 @@
 RewriteEngine on
 
 #путь до корня сайта
-RewriteBase /
+RewriteBase /lesson3/
 
 #Исключения - адреса, которые не нужно переписывать
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
 #правила изменения URL - адреса
-RewriteRule .* index.php?q=$0
+RewriteRule ^(.*)$ index.php

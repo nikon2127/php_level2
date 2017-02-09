@@ -20,7 +20,7 @@ class AdminController
         if(!empty($news->header) && !empty($news->text)){
             $news->save();
             //News::getAdd($title, $text);
-            header("Location: index.php?ctrl=News&act=One&id=$news->id");
+            header("Location: /lesson3/news/one/$news->id");
             die;
         }else{
             $view = new View();
@@ -37,7 +37,7 @@ class AdminController
         $news->id = (int) $_GET['id'];
         $news->delete();
         //News::getDelete($id);
-        header("Location: index.php");
+        header("Location: /lesson3");
     }
 
     public function actionEdit()
@@ -70,7 +70,7 @@ class AdminController
         if(!empty($_POST['title']) && !empty($_POST['text']) && !empty($_POST['id'])){
             $news->save();
             //News::getEdit($_POST['id'], $_POST['title'], $_POST['text']);
-            header("Location: index.php?crtl=News&act=One&id=$news->id");
+            header("Location: /lesson3/news/one/$news->id");
         }else{
             $view = new View();
             $view->id = $news->id;

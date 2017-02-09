@@ -9,6 +9,6 @@
 <body>
     <h1><?php echo $item->header; ?></h1>
     <p><?php echo $item->text; ?></p>
-<p><a href="index.php">На главную</a></p>
+<p><a href="/lesson3/">На главную</a></p>
 </body>
 </html>
